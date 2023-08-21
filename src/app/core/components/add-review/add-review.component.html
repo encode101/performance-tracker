@@ -1,0 +1,156 @@
+<h2>Code Review Form</h2> <em class="error-message"> - to be filled by reviewer and QA together</em>
+<form [formGroup]="addReviewForm" (ngSubmit)="showValues()">
+    <table aria-describedby="review form table">
+        <th>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </th>
+        <tr>
+            <td width="300px">Developer Name</td>
+            <!-- <td><input type=" text" id="firstName" formControlName="firstName"> -->
+            <td>
+                <select formControlName="devId" id="devId">
+                    <option value="1">Rahul Mishra</option>
+                    <option value="2">Prashant Mane</option>
+                    <option value="3">Sumedh Ugade</option>
+                    <option value="4">Monika Mohan</option>
+                    <option value="5">Ashwini</option>
+                </select>
+
+
+            </td>
+        </tr>
+        <tr>
+            <td width="300px">Project - Jira ID (Story) </td>
+            <td>
+                <!-- <select formControlName="projectName" id="projectName">
+                    <option value="phm">PHM Care Plan</option>
+                    <option value="rpm">RPM</option>
+                    <option value="vision-module">Vision Module</option>
+                </select> -->
+                <input type="text" formControlName="projectName" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Is the code optimized
+            </td>
+            <td>
+                <input type="radio" name="" id="" formControlName="codeOptimization" value="1">1
+                <input type="radio" name="" id="" formControlName="codeOptimization" value="2">2
+                <input type="radio" name="" id="" formControlName="codeOptimization" value="3">3
+                <input type="radio" name="" id="" formControlName="codeOptimization" value="4">4
+                <input type="radio" name="" id="" formControlName="codeOptimization" value="5">5
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ESLint Test Passed
+            </td>
+            <td>
+                <input type="radio" name="" id="" formControlName="esLintPassed" value="true">Yes
+                <input type="radio" name="" id="" formControlName="esLintPassed" value="false">No
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Patch File Created & Branch Frozen
+            </td>
+            <td>
+                <input type="radio" name="" id="" formControlName="patchProcess" value="true">Yes
+                <input type="radio" name="" id="" formControlName="patchProcess" value="false">No
+                {{addReviewForm.controls.patchProcess.value}}
+            </td>
+        </tr>
+        <tr *ngIf="addReviewForm.controls.patchProcess.value && addReviewForm.controls.patchProcess.value === 'true'">
+            <td>
+                Frozen branch name
+            </td>
+            <td>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Number Of Bugs
+            </td>
+            <td>
+                <input type="number" name="" id="" formControlName="numberOfBugs">
+            </td>
+        </tr>
+        <tr *ngIf="addReviewForm.controls.numberOfBugs.value && addReviewForm.controls.numberOfBugs.value >  0">
+            <td>
+                Bug Sheet Google Drive URL
+            </td>
+            <td>
+                <input type="text" name="" id="" formControlName="bugSheetUrl">
+            </td>
+        </tr>
+        <tr *ngIf="addReviewForm.controls.numberOfBugs.value && addReviewForm.controls.numberOfBugs.value >  0">
+            <td>
+                Type Of Bugs
+            </td>
+            <td>
+                <select formControlName="qualityOfBugs" id="qualityOfBugs">
+                    <option value="1">Mostly UI</option>
+                    <option value="2">Mostly Functional</option>
+                    <option value="0">Both</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <!-- <tr>
+            <td>Email</td>
+            <td><input type="email" id="emailId" formControlName="emailId">
+                <span class="error-message"
+                    *ngIf="addReviewForm.controls.emailId.invalid && (addReviewForm.controls.emailId.dirty || addReviewForm.controls.emailId.touched)">
+                    <span *ngIf="addReviewForm.controls.emailId">Invalid Email ID</span>
+                </span>
+            </td>
+        </tr> -->
+        <tr>
+            <td>What went good</td>
+            <td>
+                <textarea id="review" formControlName="goodReview" rows="5" cols="50"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>What went bad</td>
+            <td>
+                <textarea id="review" formControlName="badReview" rows="5" cols="50"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Gut feeling of overall code quality (optional)
+            </td>
+            <td>
+                <input type="radio" name="" id="" formControlName="gutFeeling" value="1">1
+                <input type="radio" name="" id="" formControlName="gutFeeling" value="2">2
+                <input type="radio" name="" id="" formControlName="gutFeeling" value="3">3
+                <input type="radio" name="" id="" formControlName="gutFeeling" value="4">4
+                <input type="radio" name="" id="" formControlName="gutFeeling" value="5">5
+            </td>
+        </tr>
+        <button type="submit" [disabled]="addReviewForm.invalid">
+            Save
+        </button>
+    </table>
+</form>
+
+<!-- ++ > {{existingReviews}} -->
+<!-- <div>
+    <table>
+        <tr *ngFor="let item of existingReviews; let i = index">
+            <td>{{item.firstName}}</td>
+            <td><button (click)="deleteRecord(item)">Delete</button></td>
+        </tr>
+    </table>
+</div> -->
