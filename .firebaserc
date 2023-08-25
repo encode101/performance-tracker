@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "flames-b0384": {
+      "hosting": {
+        "testProject": [
+          "flames-b0384"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "flames-b0384"
+  }
+}

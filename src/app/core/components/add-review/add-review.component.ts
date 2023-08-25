@@ -1,8 +1,15 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { CommonService } from 'src/app/shared/common-service/common.service';
 import { v4 as uuidv4 } from 'uuid';
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { doc, setDoc } from 'firebase/firestore';
+import { Observable } from 'rxjs';
+
+interface Item {
+  name?: string;
+}
 
 @Component({
   selector: 'app-add-review',
@@ -11,10 +18,17 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class AddReviewComponent {
   @Output() saveForm: EventEmitter<any> = new EventEmitter();
+  item$: Observable<Item[]>;
+  firestore: Firestore = inject(Firestore);
 
   existingReviews: any; //existingReviewsInterface | undefined;
-
-  constructor(private fb: FormBuilder, private cs: CommonService) {}
+  itemCollection = collection(this.firestore, 'dev-code-review');
+  constructor(private fb: FormBuilder, private cs: CommonService) {
+    this.item$ = collectionData(this.itemCollection);
+    this.item$.subscribe((item) => {
+      console.log(item);
+    });
+  }
   addReviewForm = this.fb.group({
     id: [''],
     devId: ['', [Validators.required]],
@@ -39,6 +53,8 @@ export class AddReviewComponent {
       this.getExistingReviews();
     });
     this.saveForm.emit(this.addReviewForm.value);
+
+    setDoc(doc(this.itemCollection), this.addReviewForm.value);
   }
 
   getExistingReviews() {
