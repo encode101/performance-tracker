@@ -23,12 +23,14 @@ export class AddReviewComponent {
 
   existingReviews: any; //existingReviewsInterface | undefined;
   itemCollection = collection(this.firestore, 'dev-code-review');
+
   constructor(private fb: FormBuilder, private cs: CommonService) {
     this.item$ = collectionData(this.itemCollection);
     this.item$.subscribe((item) => {
       console.log(item);
     });
   }
+
   addReviewForm = this.fb.group({
     id: [''],
     devId: ['', [Validators.required]],
@@ -37,6 +39,7 @@ export class AddReviewComponent {
     esLintPassed: [''],
     patchProcess: [''],
     numberOfBugs: [0],
+    frozenBranchName: [''],
     bugSheetUrl: [''],
     qualityOfBugs: [''],
     bugsSeverity: [''],
@@ -53,7 +56,6 @@ export class AddReviewComponent {
       this.getExistingReviews();
     });
     this.saveForm.emit(this.addReviewForm.value);
-
     setDoc(doc(this.itemCollection), this.addReviewForm.value);
   }
 

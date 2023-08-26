@@ -1,145 +1,143 @@
-<h2>Code Review Form</h2> <em class="error-message"> - to be filled by reviewer and QA together</em>
+<div class="d-flex align-items-center">
+    <h2>Code Review Form</h2>
+    <em class=" error-message ml20"> - to be filled by reviewer and QA together</em>
+</div>
+
 <form [formGroup]="addReviewForm" (ngSubmit)="showValues()">
     <table aria-describedby="review form table">
         <th>
             <tr>
-                <td></td>
-                <td></td>
+                <td [width]="1000"></td>
             </tr>
         </th>
         <tr>
-            <td width="300px">Developer Name</td>
             <!-- <td><input type=" text" id="firstName" formControlName="firstName"> -->
             <td>
-                <select formControlName="devId" id="devId">
-                    <option value="1">Rahul Mishra</option>
-                    <option value="2">Prashant Mane</option>
-                    <option value="3">Sumedh Ugade</option>
-                    <option value="4">Monika Mohan</option>
-                    <option value="5">Ashwini</option>
-                </select>
+                <mat-form-field appearance="outline">
+                    <mat-label>Developer Name</mat-label>
+                    <mat-select formControlName="devId" id="devId">
+                        <mat-option value="1">Rahul Mishra</mat-option>
+                        <mat-option value="2">Prashant Mane</mat-option>
+                        <mat-option value="3">Sumedh Ugade</mat-option>
+                        <mat-option value="4">Monika Mohan</mat-option>
+                        <mat-option value="5">Ashwini</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field appearance="outline">
+                    <mat-label>Project - Jira ID (Story)</mat-label>
+                    <input matInput formControlName="projectName" />
+                </mat-form-field>
 
             </td>
         </tr>
         <tr>
-            <td width="300px">Project - Jira ID (Story) </td>
             <td>
-                <!-- <select formControlName="projectName" id="projectName">
-                    <option value="phm">PHM Care Plan</option>
-                    <option value="rpm">RPM</option>
-                    <option value="vision-module">Vision Module</option>
-                </select> -->
-                <input type="text" formControlName="projectName" />
+                <mat-label>Is the code optimized</mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="codeOptimization">
+                    <mat-radio-button value="1">1</mat-radio-button>
+                    <mat-radio-button value="2">2</mat-radio-button>
+                    <mat-radio-button value="3">3</mat-radio-button>
+                    <mat-radio-button value="4">4</mat-radio-button>
+                    <mat-radio-button value="5">5</mat-radio-button>
+                </mat-radio-group>
             </td>
         </tr>
         <tr>
             <td>
-                Is the code optimized
-            </td>
-            <td>
-                <input type="radio" name="" id="" formControlName="codeOptimization" value="1">1
-                <input type="radio" name="" id="" formControlName="codeOptimization" value="2">2
-                <input type="radio" name="" id="" formControlName="codeOptimization" value="3">3
-                <input type="radio" name="" id="" formControlName="codeOptimization" value="4">4
-                <input type="radio" name="" id="" formControlName="codeOptimization" value="5">5
+                <mat-label>ESLint Test Passed</mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="esLintPassed">
+                    <mat-radio-button value="true">Yes</mat-radio-button>
+                    <mat-radio-button value="false">No</mat-radio-button>
+                </mat-radio-group>
+
             </td>
         </tr>
         <tr>
             <td>
-                ESLint Test Passed
-            </td>
-            <td>
-                <input type="radio" name="" id="" formControlName="esLintPassed" value="true">Yes
-                <input type="radio" name="" id="" formControlName="esLintPassed" value="false">No
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Patch File Created & Branch Frozen
-            </td>
-            <td>
-                <input type="radio" name="" id="" formControlName="patchProcess" value="true">Yes
-                <input type="radio" name="" id="" formControlName="patchProcess" value="false">No
-                {{addReviewForm.controls.patchProcess.value}}
+                <mat-label>Patch File Created & Branch Frozen</mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="patchProcess">
+                    <mat-radio-button value="true">Yes</mat-radio-button>
+                    <mat-radio-button value="false">No</mat-radio-button>
+                </mat-radio-group>
             </td>
         </tr>
         <tr *ngIf="addReviewForm.controls.patchProcess.value && addReviewForm.controls.patchProcess.value === 'true'">
             <td>
-                Frozen branch name
-            </td>
-            <td>
-                <input type="text">
+                <mat-form-field appearance="outline">
+                    <mat-label>Frozen branch name</mat-label>
+                    <input matInput formControlName="frozenBranchName" />
+                </mat-form-field>
             </td>
         </tr>
         <tr>
             <td>
-                Number Of Bugs
-            </td>
-            <td>
-                <input type="number" name="" id="" formControlName="numberOfBugs">
+                <mat-form-field appearance="outline">
+                    <mat-label>Number Of Bugs</mat-label>
+                    <input matInput formControlName="numberOfBugs" />
+                </mat-form-field>
             </td>
         </tr>
         <tr *ngIf="addReviewForm.controls.numberOfBugs.value && addReviewForm.controls.numberOfBugs.value >  0">
             <td>
-                Bug Sheet Google Drive URL
-            </td>
-            <td>
-                <input type="text" name="" id="" formControlName="bugSheetUrl">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Bug Sheet Google Drive URL</mat-label>
+                    <input matInput formControlName="bugSheetUrl" />
+                </mat-form-field>
             </td>
         </tr>
         <tr *ngIf="addReviewForm.controls.numberOfBugs.value && addReviewForm.controls.numberOfBugs.value >  0">
             <td>
-                Type Of Bugs
-            </td>
-            <td>
-                <select formControlName="qualityOfBugs" id="qualityOfBugs">
-                    <option value="1">Mostly UI</option>
-                    <option value="2">Mostly Functional</option>
-                    <option value="0">Both</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Quality Of Bugs</mat-label>
+                    <mat-select formControlName="qualityOfBugs">
+                        <mat-option value="1">Mostly UI</mat-option>
+                        <mat-option value="2">Mostly Functional</mat-option>
+                        <mat-option value="0">Both</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
             </td>
         </tr>
-        <!-- <tr>
-            <td>Email</td>
-            <td><input type="email" id="emailId" formControlName="emailId">
-                <span class="error-message"
-                    *ngIf="addReviewForm.controls.emailId.invalid && (addReviewForm.controls.emailId.dirty || addReviewForm.controls.emailId.touched)">
-                    <span *ngIf="addReviewForm.controls.emailId">Invalid Email ID</span>
-                </span>
-            </td>
-        </tr> -->
         <tr>
-            <td>What went good</td>
             <td>
-                <textarea id="review" formControlName="goodReview" rows="5" cols="50"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>What went bad</td>
-            <td>
-                <textarea id="review" formControlName="badReview" rows="5" cols="50"></textarea>
+
+                <mat-form-field>
+                    <mat-label>What went good</mat-label>
+                    <textarea matInput formControlName="goodReview"></textarea>
+                </mat-form-field>
             </td>
         </tr>
         <tr>
             <td>
-                Gut feeling of overall code quality (optional)
-            </td>
-            <td>
-                <input type="radio" name="" id="" formControlName="gutFeeling" value="1">1
-                <input type="radio" name="" id="" formControlName="gutFeeling" value="2">2
-                <input type="radio" name="" id="" formControlName="gutFeeling" value="3">3
-                <input type="radio" name="" id="" formControlName="gutFeeling" value="4">4
-                <input type="radio" name="" id="" formControlName="gutFeeling" value="5">5
+                <mat-form-field>
+                    <mat-label>What went bad</mat-label>
+                    <textarea matInput formControlName="badReview"></textarea>
+                </mat-form-field>
+
             </td>
         </tr>
-        <button type="submit" [disabled]="addReviewForm.invalid">
+        <tr>
+            <td>
+                <mat-label>Gut feeling of overall code quality (optional)</mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="gutFeeling">
+                    <mat-radio-button value="1">1</mat-radio-button>
+                    <mat-radio-button value="2">2</mat-radio-button>
+                    <mat-radio-button value="3">3</mat-radio-button>
+                    <mat-radio-button value="4">4</mat-radio-button>
+                    <mat-radio-button value="5">5</mat-radio-button>
+                </mat-radio-group>
+
+
+            </td>
+        </tr>
+        <button mat-raised-button color="primary" type="submit" [disabled]="addReviewForm.invalid">
             Save
         </button>
     </table>

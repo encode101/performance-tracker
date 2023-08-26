@@ -1,0 +1,23 @@
+.main-menu {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    float: right;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.main-menu li {
+    float: left;
+    width: auto;
+    padding: 0 20px;
+}
+
+a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.headerBg {
+    background-color: #6699CC;
+}
